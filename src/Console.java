@@ -1,4 +1,3 @@
-import java.sql.SQLOutput;
 import java.util.Arrays;
 import java.util.List;
 
@@ -19,9 +18,10 @@ public class Console {
                         if (i + 3 < args.length + 1) {
                             writeFile = args[i + 3];
                             try {
-                                List<Integer> list = ArrayConverter.convertToList(FileIO.readStringFromFile(readFile).split(" "));
-                                Logic.process(list);
-                                FileIO.writeStringToFile(writeFile, ArrayConverter.listToString(list));
+                                List<List<Triangle>> result = Triangle.getFromMatrix(FileIO.readIntMatrixFromFile(readFile));
+                                String resultStr = Triangle.getResult(result).replace("}{","},\n\n{").replace("]], [[","]],\n[[");
+                                System.out.println(resultStr);
+                                FileIO.writeStringToFile(writeFile, resultStr);
                             } catch (Exception e) {
                                 System.out.println("Error");
                                 System.exit(0);
