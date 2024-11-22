@@ -89,14 +89,14 @@ public class Triangle {
     }
 
     public static String getResult(List<List<Triangle>> list) {
-        String outputData = "";
+        String outputData = "[\n";
         for (int i = 0; i < list.size(); i++) {
-            outputData += "{";
+            outputData +=  (i!=0 ? ",\n\t[" : "\t[");
             for (int j = 0; j < list.get(i).size(); j++) {
-                outputData += (j == 0 ? "" : ", ") + Arrays.deepToString((list.get(i).get(j).getInfo(false)).toArray());
+                outputData += (j == 0 ? " " : ", ") + Arrays.deepToString((list.get(i).get(j).getInfo(false)).toArray()).replace("[[","\n\t\t[[").replace("]]","]]");
             }
-            outputData += "}";
+            outputData += "\n\t]";
         }
-        return outputData;
+        return outputData+"\n]";
     }
 }

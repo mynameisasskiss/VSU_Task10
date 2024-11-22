@@ -61,7 +61,7 @@ public class Graphics extends JFrame{
         JMenu tableMenu = new JMenu("Таблица");
 
         // Пункт меню "Сохранить"
-        JMenuItem saveItem = new JMenuItem("Сохранить в файл");
+        JMenuItem saveItem = new JMenuItem("Сохранить в json");
         // Добавление в меню пункта save
         tableMenu.add(saveItem);
         // callback (метод который будет вызван при нажатии кнопки save)
@@ -70,7 +70,7 @@ public class Graphics extends JFrame{
             if (filePath != null) {
                 String outData = outputArea.getText();
                 try {
-                    FileIO.writeStringToFile(filePath, outData);
+                    FileIO.writeStringToFile(filePath.replace(".txt",".json"), outData);
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
