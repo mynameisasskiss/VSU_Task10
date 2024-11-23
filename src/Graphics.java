@@ -1,7 +1,5 @@
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -33,8 +31,8 @@ public class Graphics extends JFrame{
         solveBtn.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
-                int[][] matrix = getTable();
-                List<List<Triangle>> result = Triangle.getFromMatrix(matrix);
+                List<Triangle> triangles = Main.initTriangles(getTable());
+                List<List<Triangle>> result = Triangle.smartGroup(triangles);
                 String text = Triangle.getResult(result).replace("}{","}\n\n{").replace("]], [[","]],\n[[");
                 outputArea.setText(text);
             }
