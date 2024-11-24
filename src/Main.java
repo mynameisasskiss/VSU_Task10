@@ -4,16 +4,15 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
         System.out.println(Arrays.toString(args));
-        if(CmdArgs.ifGUI(args)) Graphics.main(args);
-        if(CmdArgs.ifConsole(args)) {
-            String readFile = args[1];
-            String writeFile = args[3];
+        CmdArgs cmdArgs = new CmdArgs(args);
+        if(cmdArgs.ifGUI()) Graphics.main(args);
+        if(cmdArgs.ifConsole()) {
             try {
-                List<Triangle> triangles = initTriangles(FileIO.readIntMatrixFromFile(readFile));
+                List<Triangle> triangles = initTriangles(FileIO.readIntMatrixFromFile(cmdArgs.readFile));
                 List<List<Triangle>> result = Triangle.smartGroup(triangles);
                 String resultStr = Triangle.getResult(result).replace("}{", "},\n\n{").replace("]], [[", "]],\n[[");
                 System.out.println(resultStr);
-                FileIO.writeStringToFile(writeFile, resultStr);
+                FileIO.writeStringToFile(cmdArgs.writeFile, resultStr);
             } catch (Exception e) {
                 System.out.println("Error");
                 System.exit(0);

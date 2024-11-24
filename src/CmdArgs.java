@@ -1,9 +1,14 @@
-import java.util.Arrays;
-
 public class CmdArgs {
 
-    public static boolean ifConsole(String[] args){
-        String readFile, writeFile;
+    String[] args;
+    String readFile;
+    String writeFile;
+
+    public CmdArgs(String[] args){
+        this.args = args;
+    }
+
+    public boolean ifConsole(){
         for (int i = 0; i < args.length; i++) {
             if (args[i].startsWith("-h")) {
                 needHelp();
@@ -12,6 +17,8 @@ public class CmdArgs {
                 if (i + 1 < args.length + 1) {
                     if (args[i + 2].startsWith("-w")) {
                         if (i + 3 < args.length + 1) {
+                            this.readFile = args[i + 1];
+                            this.writeFile = args[i + 3];
                             return true;
                         }
                     }
@@ -21,7 +28,7 @@ public class CmdArgs {
         return false;
     }
 
-    public static boolean ifGUI(String[] args){
+    public boolean ifGUI(){
         for (int i = 0; i < args.length; i++) {
             if (args[i].startsWith("-GUI")) return true;
         }

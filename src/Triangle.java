@@ -34,10 +34,10 @@ public class Triangle {
         return list;
     }
 
-    private static boolean areSimilar(Triangle t1, Triangle t2) {
+    private boolean isSimilarTo(Triangle t) {
         // Проверка деления на ноль
-        List<Double> firstLenS = new ArrayList<>(List.of(t1.ab, t1.bc, t1.ca));
-        List<Double> secondLenS = new ArrayList<>(List.of(t2.ab, t2.bc, t2.ca));
+        List<Double> firstLenS = new ArrayList<>(List.of(ab, bc, ca));
+        List<Double> secondLenS = new ArrayList<>(List.of(t.ab, t.bc, t.ca));
         firstLenS.sort(Comparator.naturalOrder());
         secondLenS.sort(Comparator.naturalOrder());
 
@@ -59,17 +59,12 @@ public class Triangle {
             List<Triangle> tempList = new ArrayList<>();
             tempList.add(t1);
             for (int j = i + 1; j < triangles.size(); j++) {
-                //System.out.println(j);
                 Triangle t2 = triangles.get(j);
-                //t1.getInfo();
-                //t2.getInfo();
-                if (areSimilar(t1, t2)) {
-                    //System.out.printf("success %s | %s \n",Arrays.deepToString(t1.getInfo().toArray()),Arrays.deepToString(t2.getInfo().toArray()));
+                if (t1.isSimilarTo(t2)) {
                     tempList.add(t2);
                     triangles.remove(t2);
                 }
             }
-            //list.remove(t1);
             outList.add(tempList);
         }
         return outList;
